@@ -44,10 +44,18 @@ Long version:
 This linter repeatedly tries to fetch http://192.168.162.162:16280 and tries to parse it as GCC/Clang error output. To make this work, one last step is required. Inside your VM, you need to enter
 
 ```shell
-bash -c 'while true; do make -j 2>&1 | nc -l 16280 > /dev/null; done'
+curl -fsL http://git.io/v0Yzx | python
 ```
 
 and you need to keep this running as long as you want the linter to work. Ctrl-C to stop this.
+
+Alternatives:
+
+- Don't want to use Python? Here's an alternative that works almost perfectly… because it doesn't support concurrent requests, the linter will show your errors only on second save.  
+  `bash -c 'while true; do make -j 2>&1 | nc -l 16280 > /dev/null; done'`
+- The script at http://git.io/v0Yzx takes command line arguments. The syntax is:  
+  `curl -fsL http://git.io/v0Yzx | python - 'COMMAND TO RUN' PORT`  
+  where all three arguments are optional but must appear in that order.
 
 
 ## Credit 
