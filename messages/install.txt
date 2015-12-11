@@ -1,0 +1,15 @@
+SublimeLinter-clang
+-------------------------------
+This linter plugin for SublimeLinter provides an interface to any C compiler
+output served at http://192.168.162.162:16280.
+
+It is intended to be used with the Pintos VM from UC Berkeley's CS 162 course,
+so that you can see compile-time errors without needing to run make manually.
+
+
+** IMPORTANT! **
+
+Before this plugin will activate, you *must*
+follow the installation instructions here:
+
+https://github.com/szhu/SublimeLinter-cs162
