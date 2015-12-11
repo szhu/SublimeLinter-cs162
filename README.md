@@ -47,12 +47,17 @@ This linter repeatedly tries to fetch http://192.168.162.162:16280 and tries to 
 curl -fsL http://git.io/v0Yzx | python
 ```
 
-and you need to keep this running as long as you want the linter to work. Ctrl-C to stop this.
+and you need to keep this running as long as you want the linter to work. `^C` to stop this.
 
 Alternatives:
 
-- Don't want to use Python? Here's an alternative that works almost perfectly… because it doesn't support concurrent requests, the linter will show your errors only on second save.  
+- Want to run this in the background?  
+  `screen -d -m -- bash -c 'curl -fsL http://git.io/v0Yzx | python'` should do it.  
+  `screen -R` to switch to the screen where the server is running, and then `^C` to stop it.
+
+- Don't want to use Python? Here's an alternative that works almost perfectly… but because it doesn't support concurrent requests, the linter will sometimes show your errors after a subsequent save.  
   `bash -c 'while true; do make -j 2>&1 | nc -l 16280 > /dev/null; done'`
+
 - The script at http://git.io/v0Yzx takes command line arguments. The syntax is:  
   `curl -fsL http://git.io/v0Yzx | python - 'COMMAND TO RUN' PORT`  
   where all three arguments are optional but must appear in that order.
